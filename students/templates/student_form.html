@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body class="bg-gradient-to-br from-blue-400 to-indigo-900 h-screen flex items-center justify-center">
+    <div class="w-1/4 mx-auto bg-white rounded-lg shadow-lg p-6 border border-indigo-800" >
+        <h2 class="text-2xl font-bold mb-4 text-white bg-blue-500 text-center py-2 px-4 rounded tracking-widest">ADD STUDENT</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="{{ form.first_name.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
+                    {{ form.first_name.label }}
+                </label>
+                <div class="form-input w-full bg-gray-100 border border-indigo-800">
+                    {{ form.first_name }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.last_name.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
+                    {{ form.last_name.label }}
+                </label>
+                <div  class="form-input w-full bg-gray-100 border border-indigo-800">
+                    {{ form.last_name }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.course.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 70px;">
+                    {{ form.course.label }}
+                </label>
+                <div class="form-select w-full bg-gray-100 border border-indigo-800">
+                    <div class="w-full">
+                        {{ form.course }}
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.gender.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 70px;">
+                    {{ form.gender.label }}
+                </label>
+                <div class="inline-flex items-center">
+                    {{ form.gender }}
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="{{ form.age.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 50px; ">
+                    {{ form.age.label }}
+                </label>
+                <div class="form-input w-full bg-gray-100 border border-indigo-800">
+                    {{ form.age }}
+                </div>
+            </div>
+            <div class="flex justify-center">
+                <input type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 font-semibold tracking-wide" value="Submit"/>  
+            </div>
+        </form>
+        
+    </div>
+</body>
+</html>
