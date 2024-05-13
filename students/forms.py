@@ -26,9 +26,3 @@ class FilterStudents(forms.Form):
     age_start = forms.IntegerField(required=False, min_value=1)
     age_end = forms.IntegerField(required=False, min_value=1)
 
-class UpdateStudentForms(forms.Form):
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
-    age = forms.IntegerField(required=True, min_value=1)
-    gender = forms.ChoiceField(choices=GENDER, widget=forms.RadioSelect, required=True)
-    course = forms.ChoiceField(choices=COURSES, widget=forms.Select, required=True)

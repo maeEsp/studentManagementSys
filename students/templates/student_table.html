@@ -12,8 +12,8 @@
     <div class="mx-auto flex w-3/5">
         <div class="bg-white rounded-lg shadow-lg p-6  border border-indigo-800 max-h  " style="flex: 1;">
             <h2 class="text-2xl font-bold mb-4 text-white bg-blue-500 text-center py-1 px-2 rounded tracking-widest border border-indigo-800">FILTER</h2>
-            <form action="">
-            {% csrf_token %}
+            <form action="{% url 'filter' %}" method="POST">
+                {% csrf_token %}
                 <div class="mb-4">
                     <label for="{{ filter_form.full_name.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
                         {{ filter_form.full_name.label }}
@@ -26,7 +26,7 @@
                         <label for="{{ filter_form.course.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
                             {{ filter_form.course.label }}
                         </label>
-                        <div class="form-input w-3/5 border border-indigo-800">
+                        <div class="form-input">
                             {{ filter_form.course }}
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                         <label for="{{ filter_form.gender.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
                             {{ filter_form.gender.label }}
                         </label>
-                        <div class="form-input w-[183px] border border-indigo-800">
+                        <div class="">
                             {{ filter_form.gender }}
                         </div>
                     </div>
@@ -53,9 +53,13 @@
                         <label for="{{ filter_form.age_end.id_for_label }}" class="block text-white font-semibold mb-2 bg-indigo-800 text-center tracking-tighter" style="width: 100px;">
                             {{ filter_form.age_end.label }}
                         </label>
-                        <div class="form-input w-[183px] border border-indigo-800">
-                            {{ filter_form.age_end }}
+                        <div class="flex flex-row justify-between">
+                            <div class="form-input w-[183px] border border-indigo-800">
+                                {{ filter_form.age_end }}
+                            </div>
+                            <a href=""><button class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">Filter</button></a>
                         </div>
+                        
                     </div>
                 </div>
             </form>
@@ -63,12 +67,10 @@
         </div>
         <div class="bg-white rounded-lg shadow-lg p-6 border border-indigo-800" style="flex: 2;"> 
             <div class="mb-4">
-
                 <a href="{% url 'add' %}"><button class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">Add Student</button></a>
-
             </div>
 
-            <table class="min-w-full">
+            <table id="dataTable" class="min-w-full">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
 
@@ -83,15 +85,15 @@
                 </thead>
 
                 {% for x in students %}
-                <tbody class="text-gray-600 text-sm font-light">
+                <tbody id="tableBody" class="text-gray-600 text-sm font-light">
                     <tr>
                         <td class="py-1 px-2 text-center">{{x.first_name}} {{x.last_name}}</td>
                         <td class="py-1 px-2 text-center">{{x.course}}</td>
                         <td class="py-1 px-2 text-center">{{x.gender}}</td>
                         <td class="py-1 px-2 text-center">{{x.age}}</td>
                         <td class="py-1 px-2 text-center">
-                            <a href=""><button class="bg-blue-500 text-white py-1 px-3 rounded mr-2 hover:bg-blue-600">Update</button></a>
-                            <a href="delete/{{ x.id }}"><button class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Delete</button></a>
+                            <a href="{% url 'update' x.id %}"><button class="bg-blue-500 text-white py-1 px-3 rounded mr-2 hover:bg-blue-600">Update</button></a>
+                           <button onclick="deleteStudent({{ x.id }})" id="delete_button" class="bg-red-500 text-white py-1 px-3 rounded hover:bg-red-600">Delete</button>
                         </td>
                     </tr>
                 </tbody>
@@ -99,5 +101,14 @@
             </table>
         </div>
     </div>
+    <script>
+        function deleteStudent(id){
+            let sure = confirm("Are you sure you want to delete?" + id)
+            if (sure){
+                window.location = "/delete/" + id
+            }
+        }
+
+    </script>
 </body>
 </html>

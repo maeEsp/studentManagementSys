@@ -6,7 +6,9 @@ urlpatterns = [
     
     path('add/', views.home, name="add"),
 
-    path('update/', views.UpdateStudentForms, name="update"),
+    path('add/<int:id>/', views.update, name="update"),
 
-    path("delete/<int:id>/", views.delete, name="delete")
+    path("delete/<int:id>/", views.delete, name="delete"),
+
+    path('filter/', views.filter_table, name="filter")
 ]
