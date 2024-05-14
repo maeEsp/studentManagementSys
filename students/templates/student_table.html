@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Student Database</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
@@ -103,7 +103,7 @@
     </div>
     <script>
         function deleteStudent(id){
-            let sure = confirm("Are you sure you want to delete?" + id)
+            let sure = confirm("Are you sure you want to delete?")
             if (sure){
                 window.location = "/delete/" + id
             }

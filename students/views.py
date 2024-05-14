@@ -35,7 +35,6 @@ def filter_table(request):
     filter_form = FilterStudents() 
     context = {}
 
-    
     if request.method == "POST":
         filter_form = FilterStudents(request.POST) 
         if(filter_form.is_valid()):
@@ -54,7 +53,7 @@ def filter_table(request):
                 filters &= Q(gender=gender)
             if age_start and age_end:
                 filters &= Q(age__range=(age_start, age_end))
-                 
+            
             students  = students.annotate(full_name=Concat('first_name',Value(' ') ,'last_name',output_field=CharField())).filter(filters)
             # return render(request, 'student_list.html', {'students': students})
     context = {'students': students, 'filter_form': filter_form}  
